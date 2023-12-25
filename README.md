@@ -1,0 +1,1 @@
+- XMLHttpRequest MDN 문서 : https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
