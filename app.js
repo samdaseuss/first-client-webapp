@@ -17,22 +17,23 @@ const ul = document.createElement('ul');
 window.addEventListener('hashchange', function() {
     const id = location.hash.substring(1);
 
-    getData(CONTENT_URL.replace('@id', id));
-    const title = document.createElement('h1');
+    const newsContent = getData(CONTENT_URL.replace('@id', id));
 
-    title.innerHTML = newsContent.title;
-    content.appendChild(title);
+    container.innerHTML = 
+        `<h1>${newsContent.title}</h1>` +
+        // 네비게이션 용도로 작동할 UI 요소
+        `<div>
+            <a href="#">목록으로</a>
+        </div>`
 });
 
 for(let i = 0; i < 10; i++) {
     const div = document.createElement('div');
-    const li = document.createElement('ul');
-    const a = document.createElement('a');
 
     div.innerHTML = `
         <li>
             <a href = "#${newsFeed[i].id}">
-            ${newsFeed[i].title} (${newsFeed[i].comments_count})
+                ${newsFeed[i].title} (${newsFeed[i].comments_count})
             </a>
         </li>
     `;
