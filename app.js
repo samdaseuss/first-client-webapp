@@ -33,7 +33,7 @@ function newsFeed() {
     newsList.push('</ul>');
     newsList.push(`
         <div>
-            <a href="#/page/${store.currentPage -1}">이전페이지</a>
+            <a href="#/page/${store.currentPage > 1 ? store.currentPage -1 : 1}">이전페이지</a>
             <a href="#/page/${store.currentPage +1}">다음페이지</a>
         </div>
     `);
