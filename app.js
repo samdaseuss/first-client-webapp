@@ -42,7 +42,7 @@ function newsFeed() {
 }
 
 function newsDetail() {
-    const id = location.hash.substring(1);
+    const id = location.hash.substring(7);
 
     const newsContent = getData(CONTENT_URL.replace('@id', id));
 
@@ -50,7 +50,7 @@ function newsDetail() {
         `<h1>${newsContent.title}</h1>` +
         // 네비게이션 용도로 작동할 UI 요소
         `<div>
-            <a href="#">목록으로</a>
+            <a href="#/page/${store.currentPage}">목록으로</a>
         </div>`
 }
 
@@ -59,7 +59,7 @@ function router() {
 
     if (routePath === '') newsFeed();
     else if (routePath.indexOf('#/page/')>=0) {
-        store.currentPage = 2;
+        store.currentPage = Number(routePath.substring(7));
         newsFeed();
     }
     else newsDetail();
