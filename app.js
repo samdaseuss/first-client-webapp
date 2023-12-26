@@ -3,6 +3,9 @@ const ajax = new XMLHttpRequest();
 const content = document.createElement('div');
 const NEWS_URL = 'https://api.hnpwa.com/v0/news/1.json';
 const CONTENT_URL = 'https://api.hnpwa.com/v0/item/@id.json';
+const store = {
+    currentPage: 1,
+};
 
 function getData(url) {
     ajax.open('GET', url, false);
@@ -17,17 +20,23 @@ function newsFeed() {
 
     newsList.push('<ul>');
 
-    for(let i = 0; i < 10; i++) {
+    for(let i = (store.currentPage -1) *10; i < store.currentPage *10; i++) {
         newsList.push(`
             <li>
-                <a href = "#${newsFeed[i].id}">
+                <a href = "#/show/${newsFeed[i].id}">
                     ${newsFeed[i].title} (${newsFeed[i].comments_count})
                 </a>
             </li>
         `);
     }
 
-    newsList.push('</ul>')
+    newsList.push('</ul>');
+    newsList.push(`
+        <div>
+            <a href="#/page/${store.currentPage -1}">이전페이지</a>
+            <a href="#/page/${store.currentPage +1}">다음페이지</a>
+        </div>
+    `);
 
     container.innerHTML = newsList.join('');
 }
@@ -45,6 +54,17 @@ function newsDetail() {
         </div>`
 }
 
-newsFeed();
+function router() {
+    const routePath = location.hash;
 
-window.addEventListener('hashchange', newsDetail);
+    if (routePath === '') newsFeed();
+    else if (routePath.indexOf('#/page/')>=0) {
+        store.currentPage = 2;
+        newsFeed();
+    }
+    else newsDetail();
+}
+
+window.addEventListener('hashchange', router);
+
+router();
