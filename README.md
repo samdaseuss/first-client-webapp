@@ -1,3 +1,5 @@
+# JAVASCRIPT로 작성한 웹 애플리케이션
+
 ## XMLHttpRequest
 - .open()
 - .send()
