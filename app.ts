@@ -1,8 +1,24 @@
-const container = document.getElementById('root');
-const ajax = new XMLHttpRequest();
+type Store = {
+  currentPage: number;
+  feeds: NewsFeed[];
+}
+
+type NewsFeed = {
+  id: number;
+  comments_count: number;
+  url: string;
+  user: string;
+  time_ago: string;
+  points: number;
+  title: string;
+  read?: boolean;
+}
+
+const container: HTMLElement | null = document.getElementById('root');
+const ajax: XMLHttpRequest = new XMLHttpRequest();
 const NEWS_URL = 'https://api.hnpwa.com/v0/news/1.json';
 const CONTENT_URL = 'https://api.hnpwa.com/v0/item/@id.json';
-const store = {
+const store: Store = {
   currentPage: 1,
   feeds: [],
 };
@@ -23,7 +39,7 @@ function makeFeeds(feeds) {
 }
 
 function newsFeed() {
-  const newsFeed = store.feeds;
+  const newsFeed: NewsFeed[] = store.feeds;
   const newsList = [];
   let template = `
     <div class="bg-gray-600 min-h-screen">
@@ -54,7 +70,7 @@ function newsFeed() {
     newsFeed = store.feeds = makeFeeds(getData(NEWS_URL));
   }
 
-  for(let i = (store.currentPage - 1) * 10; i < store.currentPage * 10; i++) {
+  for (let i = (store.currentPage - 1) * 10; i < store.currentPage * 10; i++) {
     newsList.push(`
       <div class="p-6 ${newsFeed[i].read ? 'bg-red-500' : 'bg-white'} mt-6 rounded-lg shadow-md transition-colors duration-500 hover:bg-green-100">
         <div class="flex">
@@ -79,8 +95,12 @@ function newsFeed() {
   template = template.replace('{{__news_feed__}}', newsList.join(''));
   template = template.replace('{{__prev_page__}}', store.currentPage > 1 ? store.currentPage - 1 : 1);
   template = template.replace('{{__next_page__}}', store.currentPage + 1);
-  
-  container.innerHTML = template;
+
+  if (container != null) {
+    container.innerHTML = template;
+  } else {
+    console.error("최상위 컨테이너가 없어 UI를 그릴 수 없습니다.");
+  }
 }
 
 function newsDetail() {
@@ -115,7 +135,7 @@ function newsDetail() {
     </div>
   `;
 
-  for(let i=0; i < store.feeds.length; i++) {
+  for (let i = 0; i < store.feeds.length; i++) {
     if (store.feeds[i].id === Number(id)) {
       store.feeds[i].read = true;
       break;
@@ -125,7 +145,7 @@ function newsDetail() {
   function makeComment(comments, called = 0) {
     const commentString = [];
 
-    for(let i = 0; i < comments.length; i++) {
+    for (let i = 0; i < comments.length; i++) {
       commentString.push(`
         <div style="padding-left: ${called * 40}px;" class="mt-4">
           <div class="text-gray-400">
@@ -143,8 +163,11 @@ function newsDetail() {
 
     return commentString.join('');
   }
-
-  container.innerHTML = template.replace('{{__comments__}}', makeComment(newsContent.comments));
+  if (container != null) {
+    container.innerHTML = template.replace('{{__comments__}}', makeComment(newsContent.comments));
+  } else {
+    console.error("최상위 컨테이너가 없어 UI를 그릴 수 없습니다.");
+  }
 }
 
 function router() {
