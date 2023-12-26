@@ -13,3 +13,15 @@
 ## 그 외 도구들
 - 코드 리펙토링 : `handeler` https://handlebarsjs.com/
 - 아이콘 : `fontawesome`  https://fontawesome.com/
+
+## 깃허브 어려운 점 해결
+- 깃 체크아웃 하고 메인에 붙이는 방법
+    - 깃 체크아웃 git checkout 8a063627cc77d2760bc233e597bc119d6a3b1eec
+    - HEAD의 현재 위치는 8a06362 일 것 임
+    - 현재 위치에서 커밋하고
+    - 현재 위치를 main으로 전환 git checkout main
+    - 현재 위치에 이전 커밋 정보를 머지 시킨다. git merge 8a063627
+    - 원격저장소에 git push origin main로 올리기
+
+## 포팅 과정
+- js > ts로 전환
