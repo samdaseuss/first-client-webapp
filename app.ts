@@ -36,6 +36,34 @@ const store: Store = {
   feeds: [],
 };
 
+class Api {
+  url: string;
+  ajax: XMLHttpRequest;
+
+  constructor(url: string) {
+    this.url = url;
+    this.ajax = new XMLHttpRequest();
+  }
+}
+
+class NewsFeedApi extends Api {
+  getData(): NewsFeed[] {
+    ajax.open('GET', url, false);
+    ajax.send();
+
+    return JSON.parse(ajax.response);
+  }
+}
+
+class NewsDetailApi extends Api {
+  getData(): NewsDetail {
+    ajax.open('GET', url, false);
+    ajax.send();
+
+    return JSON.parse(ajax.response);
+  }
+}
+
 function getData<AjaxResponse>(url: string): AjaxResponse {
   ajax.open('GET', url, false);
   ajax.send();
