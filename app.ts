@@ -38,6 +38,14 @@ function makeFeeds(feeds) {
   return feeds;
 }
 
+function updateView(html) {
+  if (container != null) {
+    container.innerHTML = html;
+  } else {
+    console.error("최상위 컨테이너가 없어 UI를 그릴 수 없습니다.");
+  }
+}
+
 function newsFeed() {
   const newsFeed: NewsFeed[] = store.feeds;
   const newsList = [];
@@ -96,11 +104,7 @@ function newsFeed() {
   template = template.replace('{{__prev_page__}}', store.currentPage > 1 ? store.currentPage - 1 : 1);
   template = template.replace('{{__next_page__}}', store.currentPage + 1);
 
-  if (container != null) {
-    container.innerHTML = template;
-  } else {
-    console.error("최상위 컨테이너가 없어 UI를 그릴 수 없습니다.");
-  }
+  updateView(template);
 }
 
 function newsDetail() {
@@ -163,11 +167,8 @@ function newsDetail() {
 
     return commentString.join('');
   }
-  if (container != null) {
-    container.innerHTML = template.replace('{{__comments__}}', makeComment(newsContent.comments));
-  } else {
-    console.error("최상위 컨테이너가 없어 UI를 그릴 수 없습니다.");
-  }
+
+  updateView(template.replace('{{__comments__}}', makeComment(newsContent.comments)));
 }
 
 function router() {
