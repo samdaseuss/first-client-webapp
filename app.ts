@@ -46,15 +46,15 @@ class Api {
   }
 }
 
-class NewsFeedApi extends Api {
+class NewsFeedApi {
   getData(): NewsFeed[] {
-    return this.getRequest<NewsFeed[]>();
+    return this.getRequest<NewsFeed[]>(NEWS_URL);
   }
 }
 
-class NewsDetailApi extends Api {
-  getData(): NewsDetail {
-    return this.getRequest<NewsDetail>();
+class NewsDetailApi {
+  getData(id: string): NewsDetail {
+    return this.getRequest<NewsDetail>(CONTENT_URL.replace('@id', id));
   }
 }
 
