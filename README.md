@@ -1,15 +1,16 @@
-## XMLHttpRequest
-- .open()
-- .send()
-- .response
+# typescript 웹 어플리케이션
 
- ** 참고 XMLHttpRequest MDN 문서 : https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+## 포팅 과정
+- js > ts로 전환
 
-## DOM API
-1. `요소1.appendChild(요소2);` 요소2를 요소1 자식으로 붙이기
-2. `요소.innerHTML = '';` 하위 내용 싹 지우기
-3. `요소.innerHTML = '문자열';` 오버라이트, 1번과 비교해서 기억
+## typescript
+### tsconfig.json 설정 파일
+- `strict` 타입스크립트의 기능을 얼마나 엄격하게 적용해서 변환시킬 것인가?
+- `target` 
+- https://www.typescriptlang.org/ko/docs/handbook/tsconfig-json.html
 
-## 그 외 도구들
-- 코드 리펙토링 : `handeler` https://handlebarsjs.com/
-- 아이콘 : `fontawesome`  https://fontawesome.com/
+### 변수 타이핑
+
+
+### ts 장점
+- 마우스 올리면 소스코드에 대한 설명 뜸 ( 소스 코드를 찾아 헤멜 필요가 없음 )
