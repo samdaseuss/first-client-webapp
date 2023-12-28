@@ -97,7 +97,7 @@ function updateView(html: string): void {
 }
 
 function newsFeed(): void {
-  const api = new NewsFeedApi(NEWS_URL);
+  const api = new NewsFeedApi();
   let newsFeed: NewsFeed[] = store.feeds;
   const newsList = [];
   let template = `
@@ -160,8 +160,8 @@ function newsFeed(): void {
 
 function newsDetail(): void {
   const id = location.hash.substring(7);
-  const api = new NewsDetailApi(CONTENT_URL.replace('@id', id));
-  const newsContent = api.getData();
+  const api = new NewsDetailApi();
+  const newsContent = api.getData(id);
   let template = `
     <div class="bg-gray-600 min-h-screen pb-8">
       <div class="bg-white text-xl">
