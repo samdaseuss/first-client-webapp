@@ -36,6 +36,10 @@ const store: Store = {
   feeds: [],
 };
 
+function applyApiMixins(targetClass: any, baseClass: any) {
+
+}
+
 class Api {
   getRequest<AjaxResponse>(url: string): AjaxResponse {
     const ajax = new XMLHttpRequest();
@@ -57,6 +61,9 @@ class NewsDetailApi {
     return this.getRequest<NewsDetail>(CONTENT_URL.replace('@id', id));
   }
 }
+
+applyApiMixins(NewsFeedApi, Api);
+applyApiMixins(NewsDetailApi, Api);
 
 function getData<AjaxResponse>(url: string): AjaxResponse {
   ajax.open('GET', url, false);
