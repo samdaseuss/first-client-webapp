@@ -70,6 +70,9 @@ class NewsDetailApi {
   }
 }
 
+interface NewsFeedApi extends Api { };
+interface NewsDetailApi extends Api { };
+
 applyApiMixins(NewsFeedApi, [Api]);
 applyApiMixins(NewsDetailApi, [Api]);
 
