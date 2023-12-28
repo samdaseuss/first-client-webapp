@@ -36,7 +36,7 @@ const store: Store = {
   feeds: [],
 };
 
-function applyApiMixins(targetClass: any, baseClass: any) {
+function applyApiMixins(targetClass: any, baseClasses: any[]) {
 
 }
 
@@ -62,8 +62,8 @@ class NewsDetailApi {
   }
 }
 
-applyApiMixins(NewsFeedApi, Api);
-applyApiMixins(NewsDetailApi, Api);
+applyApiMixins(NewsFeedApi, [Api]);
+applyApiMixins(NewsDetailApi, [Api]);
 
 function getData<AjaxResponse>(url: string): AjaxResponse {
   ajax.open('GET', url, false);
