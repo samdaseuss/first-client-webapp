@@ -37,7 +37,15 @@ const store: Store = {
 };
 
 function applyApiMixins(targetClass: any, baseClasses: any[]) {
+  baseClasses.forEach(baseClass => {
+    Object.getOwnPropertyNames(baseClass.prototype).forEach(name => {
+      const descriptor = Object.getOwnPropertyDescriptor(baseClass.prototype, name);
 
+      if (descriptor) {
+        Object.defineProperty(targetClass.prototype, name, descriptor);
+      }
+    });
+  });
 }
 
 class Api {
