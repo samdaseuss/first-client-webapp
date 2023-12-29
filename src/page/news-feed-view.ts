@@ -46,10 +46,6 @@ export default class NewsFeedView extends View {
       this.store.setFeeds(await this.api.getData());
     }
 
-    this.renderView();
-  }
-
-  renderView = () => {
     for (let i = (this.store.currentPage - 1) * 10; i < this.store.currentPage * 10; i++) {
       const { id, title, comments_count, user, points, time_ago, read } = this.store.getFeed(i);
 
